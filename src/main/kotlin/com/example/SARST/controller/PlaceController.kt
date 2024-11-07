@@ -1,7 +1,6 @@
 package com.example.SARST.controller
 
 import com.example.SARST.dto.PlaceDto
-import com.example.SARST.entity.Place
 import com.example.SARST.response.SuccessResponse
 import com.example.SARST.response.FailResponse
 import com.example.SARST.response.ErrorResponse
@@ -26,7 +25,6 @@ class PlaceController {
             val places = placeService.getAllPlaces()
             ResponseEntity(SuccessResponse(data = places), HttpStatus.OK)
         } catch (e: Exception) {
-            // Manejo de excepciones específicas si es necesario
             ResponseEntity(ErrorResponse(message = "Error al obtener los lugares", code = 500), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -37,11 +35,9 @@ class PlaceController {
         return try {
             val place = placeService.getPlaceById(id)
             place?.let {
-                // Devuelves el lugar encontrado con una respuesta exitosa
                 ResponseEntity(SuccessResponse(data = place), HttpStatus.OK)
             } ?: ResponseEntity(FailResponse(data = "Lugar no encontrado"), HttpStatus.NOT_FOUND)
         } catch (e: Exception) {
-            // Manejo de errores internos si la excepción es más general
             ResponseEntity(ErrorResponse(message = "Error al obtener el lugar", code = 500), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -53,7 +49,6 @@ class PlaceController {
             val place = placeService.save(placeDto)
             ResponseEntity(SuccessResponse(data = place), HttpStatus.CREATED)
         } catch (e: Exception) {
-            // Si ocurre un error al guardar el lugar
             ResponseEntity(ErrorResponse(message = "Error al crear el lugar", code = 500), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -65,7 +60,6 @@ class PlaceController {
             val updatedPlace = placeService.update(id, placeDto)
             ResponseEntity(SuccessResponse(data = updatedPlace), HttpStatus.OK)
         } catch (e: Exception) {
-            // Error al actualizar el lugar
             ResponseEntity(ErrorResponse(message = "Error al actualizar el lugar", code = 500), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
@@ -76,10 +70,8 @@ class PlaceController {
     fun delete(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             placeService.delete(id)
-            // No se devuelve cuerpo en la respuesta, solo el código de estado
             ResponseEntity(HttpStatus.NO_CONTENT)
         } catch (e: Exception) {
-            // Error al eliminar el lugar
             ResponseEntity(ErrorResponse(message = "Error al eliminar el lugar", code = 500), HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }

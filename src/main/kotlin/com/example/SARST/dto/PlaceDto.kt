@@ -16,6 +16,6 @@ class PlaceDto {
     @NotNull(message = "Last Assignment is required")
     var assignmentDate: LocalDate? = null
 
-    @NotNull(message = "Skills are required")
+    @NotNull(message = "Skill is required")
     var requiredSkill: String? = null
 }

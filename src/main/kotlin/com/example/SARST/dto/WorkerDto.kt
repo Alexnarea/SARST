@@ -16,6 +16,6 @@ class WorkerDto {
     @NotNull(message = "Last Assignment is required")
     var lastAssignment: LocalDate? = null
 
-    @NotNull(message = "Skills are required")
+    @NotNull(message = "Skill is required")
     var skill: String? = null
 }
